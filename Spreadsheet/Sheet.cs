@@ -1,19 +1,21 @@
-﻿namespace Spreadsheet
+﻿using System.Collections.Generic;
+
+namespace Spreadsheet
 {
     public class Sheet
     {
-        private string cellContent = string.Empty;
+        private readonly Dictionary<string, string> cells = new Dictionary<string, string>();
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "cellAddress")]
         public string Get(string cellAddress)
         {
-            return cellContent;
+            return cells.ContainsKey(cellAddress) 
+                ? cells[cellAddress] 
+                : string.Empty;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "cellAddress")]
         public void Put(string cellAddress, string content)
         {
-            cellContent = content;
+            cells[cellAddress] = content;
         }
     }
 }

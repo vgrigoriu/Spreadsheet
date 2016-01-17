@@ -33,9 +33,35 @@ namespace Spreadsheet.Tests
         public void TextCellsAreStored()
         {
             var sheet = new Sheet();
-            var theCell = "A21";
+            const string theCell = "A21";
             sheet.Put(theCell, "A string");
             Assert.That(sheet.Get(theCell), Is.EqualTo("A string"));
+        }
+
+        //public void testThatManyCellsExist()
+        //{
+        //    Sheet sheet = new Sheet();
+        //    sheet.put("A1", "First");
+        //    sheet.put("X27", "Second");
+        //    sheet.put("ZX901", "Third");
+
+        //    assertEquals("A1", "First", sheet.get("A1"));
+        //    assertEquals("X27", "Second", sheet.get("X27"));
+        //    assertEquals("ZX901", "Third", sheet.get("ZX901"));
+
+        //    sheet.put("A1", "Fourth");
+        //    assertEquals("A1 after", "Fourth", sheet.get("A1"));
+        //    assertEquals("X27 same", "Second", sheet.get("X27"));
+        //    assertEquals("ZX901 same", "Third", sheet.get("ZX901"));
+        //}
+        public void ManyCellsExist()
+        {
+            var sheet = new Sheet();
+            sheet.Put("A1", "First");
+            sheet.Put("X27", "Second");
+
+            Assert.That(sheet.Get("A1"), Is.EqualTo("First"));
+            Assert.That(sheet.Get("X27"), Is.EqualTo("Second"));
         }
     }
 }
