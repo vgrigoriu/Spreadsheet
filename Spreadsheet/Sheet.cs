@@ -14,6 +14,13 @@ namespace Spreadsheet
                 : string.Empty;
         }
 
+        public string GetLiteral(string cellAddress)
+        {
+            return cells.ContainsKey(cellAddress)
+                ? cells[cellAddress].RawContent
+                : string.Empty;
+        }
+
         public void Put(string cellAddress, string content)
         {
             cells[cellAddress] = new Cell(content);
@@ -21,10 +28,13 @@ namespace Spreadsheet
 
         private class Cell
         {
+            public string RawContent { get; }
+
             public string Value { get; }
 
             public Cell(string rawContent)
             {
+                RawContent = rawContent;
                 Value = IsNumeric(rawContent)
                     ? GetNumericValue(rawContent)
                     : rawContent;

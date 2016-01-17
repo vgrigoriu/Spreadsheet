@@ -106,5 +106,35 @@ namespace Spreadsheet.Tests
             sheet.Put(theCell, " ");
             Assert.That(sheet.Get(theCell), Is.EqualTo(" "));
         }
+
+        //public void testThatWeHaveAccessToCellLiteralValuesForEditing()
+        //{
+        //    Sheet sheet = new Sheet();
+        //    String theCell = "A21";
+
+        //    sheet.put(theCell, "Some string");
+        //    assertEquals("Some string", sheet.getLiteral(theCell));
+
+        //    sheet.put(theCell, " 1234 ");
+        //    assertEquals(" 1234 ", sheet.getLiteral(theCell));
+
+        //    sheet.put(theCell, "=7"); // Foreshadowing formulas:)
+        //    assertEquals("=7", sheet.getLiteral(theCell));
+        //}
+        [Test]
+        public void WeHaveAccessToCellLiteralValuesForEditing()
+        {
+            var sheet = new Sheet();
+            const string theCell = "C21";
+
+            sheet.Put(theCell, "Some string");
+            Assert.That(sheet.GetLiteral(theCell), Is.EqualTo("Some string"));
+
+            sheet.Put(theCell, " 1234 ");
+            Assert.That(sheet.GetLiteral(theCell), Is.EqualTo(" 1234 "));
+
+            sheet.Put(theCell, "=7");
+            Assert.That(sheet.GetLiteral(theCell), Is.EqualTo("=7"));
+        }
     }
 }
