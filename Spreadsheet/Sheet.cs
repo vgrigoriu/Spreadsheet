@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Spreadsheet
 {
@@ -20,13 +21,23 @@ namespace Spreadsheet
 
         private class Cell
         {
-            private readonly string rawContent;
-
-            public string Value => rawContent;
+            public string Value { get; }
 
             public Cell(string rawContent)
             {
-                this.rawContent = rawContent;
+                Value = IsNumeric(rawContent)
+                    ? GetNumericValue(rawContent)
+                    : rawContent;
+            }
+
+            private static bool IsNumeric(string rawContent)
+            {
+                return Regex.IsMatch(rawContent, @"^\s*\d+\s*$");
+            }
+
+            private static string GetNumericValue(string rawContent)
+            {
+                return rawContent.Trim();
             }
         }
     }
